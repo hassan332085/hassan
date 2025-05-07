@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>حذف الحساب</title>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin-top: 50px; direction: rtl; }
+    button { padding: 10px 20px; background: red; color: white; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>حذف حسابك</h1>
+  <p>عند الضغط على الزر سيتم حذف حسابك بشكل دائم!</p>
+  <button onclick="deleteAccount()">حذف الحساب</button>
+
+  <script>
+    // إعداد Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyD9acIVNReOE3OX3Ct_wsxky_n4JkAHUy8",
+      authDomain: "drv7-3e3da.firebaseapp.comا",
+      projectId: "drv7-3e3da",
+      // ... أكمل بيانات مشروعك من Firebase Console
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function deleteAccount() {
+      const user = auth.currentUser;
+      if (user) {
+        user.delete().then(() => {
+          alert("تم حذف الحساب بنجاح");
+        }).catch((error) => {
+          alert("فشل حذف الحساب: " + error.message);
+        });
+      } else {
+        alert("يجب تسجيل الدخول أولاً");
+      }
+    }
+  </script>
+</body>
+</html>
